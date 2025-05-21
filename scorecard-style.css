@@ -1,167 +1,238 @@
-﻿/* ------------- Layout tweaks ------------- */
+﻿
 section[data-section-id="68002a77cb0f5218eb6b2f31"] {
-  z-index: 99999 !important;
+ z-index: 99999 !important;
 }
 
-.scorecard-container,
-.scorecard-container * {
-  font-family: inherit !important;           /* inherit site font */
-}
-.scorecard-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow-x: auto;
-}
+  /* Inherit site’s default font */
+  .scorecard-container, .scorecard-container * { font-family: inherit !important; }
+  .scorecard-container { width: 100%; max-width: 1200px; margin: 0 auto; overflow-x: auto; }
+  .filters { display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 10px; }
+  .filters input, .filters select { padding: 5px; font-size: 1rem; margin: 5px 0; }
+  #scorecard-table { width: 100% !important; table-layout: fixed; }
 
-/* ---------- Filters ---------- */
-.filters { display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 10px; }
-.filters input,
-.filters select { padding: 5px; font-size: 1rem; margin: 5px 0; }
 
-/* ---------- Table basics ---------- */
-#scorecard-table { width: 100% !important; table-layout: fixed; }
+
+
 #scorecard-table thead th {
-  position: sticky; top: 0; z-index: 1000;
-  background: #FDFBE9;                         /* CNL off-white */
+  position: sticky;
+  top: 0;                       /* stay flush with the top */
+  z-index: 1000;                /* sit above table body cells */
+  background: #FDFBE9;          /* match your off-white CNL brand colour */
 }
-.dataTables_filter { float: left !important; padding: 5px 0 5vh 5px; }
-table.dataTable td { padding: 12px !important; vertical-align: middle; cursor: pointer; }
 
-/* ---------- Pass / Fail pills ---------- */
-.pass,
-.fail {
-  display: inline-block; padding: 4px 12px;
-  border-radius: 999px; color: #fff; font-weight: bold;
-  white-space: nowrap; font-size: 1.1rem;
-}
-.pass { background:#28a745; }
-.fail { background:#dc3545; }
+  /* Top Margin and Search Function */
+  .dataTables_wrapper {}
+  .dataTables_filter { float: left !important; padding-bottom: 5vh; padding-left: 5px; padding-top:5px; }
+  table.dataTable td { padding: 12px !important; vertical-align: middle; cursor: pointer; }
 
-/* ---------- Grade circles ---------- */
-.grade-circle {
-  display: inline-block; width: 36px; height: 36px; line-height: 36px;
-  border-radius: 50%; color:#fff; text-align: center;
-  font-weight: bold; font-size: 1.1rem;
-}
-.grade-Aplus { background:#803c97; }
-.grade-A     { background:#28a745; }
-.grade-B     { background:#7cc576; }
-.grade-C     { background:#ffc107; }
-.grade-D     { background:#fd7e14; }
-.grade-F     { background:#dc3545; }
-.grade-circle.no-record { background:gray; }
-#scorecard-table td .grade-circle.no-record { background:gray !important; }
+  /* Pass/Fail pills */
+  .pass, .fail { display: inline-block; padding: 4px 12px; border-radius: 999px; color: white; font-weight: bold; white-space: nowrap; font-size: 1.1rem;}
+  .pass { background-color: #28a745; }
+  .fail { background-color: #dc3545; }
 
-/* Extended keys (B+, A-, etc.) */
-.grade-circle.grade-Aplus   { background:#803c97; }
-.grade-circle.grade-A       { background:#28a745; }
-.grade-circle.grade-Aminus  { background:#218838; }
-.grade-circle.grade-Bplus   { background:#7cc576; }
-.grade-circle.grade-Bminus  { background:#5cae5c; }
-.grade-circle.grade-Cplus   { background:#ffc107; }
-.grade-circle.grade-Cminus  { background:#e0a800; }
-.grade-circle.grade-Dplus   { background:#fd7e14; }
-.grade-circle.grade-Dminus  { background:#c7510a; }
+  /* Grade circles: base */
+  .grade-circle { display: inline-block; width: 36px; height: 36px; line-height: 36px; border-radius: 50%; color: white; text-align: center; font-weight: bold; font-size: 1.1rem; }
+  /* Column 3: Pre-Trump Trade Record overrides */
+  .grade-Aplus { background-color: #803c97; }
+  .grade-A     { background-color: #28a745; }
+  .grade-B     { background-color: #7cc576; }
+  .grade-C     { background-color: #ffc107; }
+  .grade-D     { background-color: #fd7e14; }
+  .grade-F     { background-color: #dc3545; }
+  .grade-circle.no-record { background-color: gray; }
+  /* Ensure no-record stays gray after sorting */
+  #scorecard-table td .grade-circle.no-record {
+    background-color: gray !important;
+  }
 
-/* ---------- Overall-grade pill ---------- */
+  /* Grade circles: other columns */
+  .grade-circle.grade-Aplus { background-color: #803c97; }
+  .grade-circle.grade-A { background-color: #28a745; }
+  .grade-circle.grade-Aminus { background-color: #218838; }
+  .grade-circle.grade-Bplus { background-color: #7cc576; }
+  .grade-circle.grade-Bminus { background-color: #5cae5c; }
+  .grade-circle.grade-Cplus { background-color: #ffc107; }
+  .grade-circle.grade-Cminus { background-color: #e0a800; }
+  .grade-circle.grade-Dplus { background-color: #fd7e14; }
+  .grade-circle.grade-Dminus { background-color: #c7510a; }
+  .grade-circle.grade-no-record { background-color: gray; }           
+
+ /* ===== OVERALL-GRADE BADGE ===== */
 .overall-pill{
-  display:inline-flex; align-items:center; gap:8px;
-  padding:6px 10px; border-radius:999px;
-  font-weight:600; line-height:1; font-size:1rem; white-space:nowrap;
+  /* pill container */
+  display:inline-flex;              /* circle + label side-by-side   */
+  align-items:center;
+  gap:8px;                          /* space between circle & label  */
+  padding:6px 10px;                 /* 18px so text never touches edge */
+  border-radius:999px;              /* fully rounded pill            */
+  font-weight:600;
+  line-height:1;                    /* keeps the pill compact        */
+  font-size:1rem;
+  white-space:nowrap;
 }
+
+/* circle inside the pill */
 .overall-pill .grade-circle{
-  width:34px; height:34px; line-height:34px;
-  flex:0 0 34px; border-radius:50%; text-align:center;
-}
-.overall-pill .grade-label{ color:#fff; text-transform:uppercase; letter-spacing:.03em; font-size:1rem; font-weight:bold; }
-
-/* Pill colour themes */
-.overall-Aplus{ background:#803c97; } .overall-Aplus .grade-circle{ background:#e5d4f1; color:#803c97; }
-.overall-A    { background:#28a745; } .overall-A .grade-circle   { background:#d8f0e1; color:#28a745; }
-.overall-B    { background:#7cc576; } .overall-B .grade-circle   { background:#dbeedc; color:#7cc576; }
-.overall-C    { background:#ffc107; } .overall-C .grade-circle   { background:#ffedb8; color:#ffc107; }
-.overall-D    { background:#fd7e14; } .overall-D .grade-circle   { background:#ffd6b8; color:#fd7e14; }
-.overall-F    { background:#dc3545; } .overall-F .grade-circle   { background:#fccccc; color:#dc3545; }
-
-/* ---------- Diagonal headers ---------- */
-.th-rotate   { position:relative; width:60px; }
-.th-rotate__inner{
-  position:absolute; bottom:0; left:50%;
-  transform:translateX(-50%) translateY(-160%) rotate(-45deg);
-  transform-origin:center center; white-space:normal; text-align:left;
-  width:150px; font-size:14px; line-height:1.2;
-}
-#th-pttr, #th-caot, #th-rtct, #th-rtmt, #th-rtrt, #th-sotaapt {
-  transform:translateX(-25%) translateY(-160%) rotate(-45deg);
+  width:34px; height:34px;
+  line-height:34px;                 /* perfect vertical centring     */
+  border-radius:50%;
+  font-weight:800;
+  text-align:center;
+  flex:0 0 34px;                    /* fixed width so label never shifts */
 }
 
-/* Remove default sorting icons from rotated headers */
+/* label text */
+.overall-pill .grade-label{
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  font-size: 1rem;
+  font-family: inherit !important;
+  font-weight: bold !important;
+}
+
+/* ===== swapped theme: dark pill | light circle | white label ===== */
+.overall-pill .grade-label{ color:#fff; }               /* one-liner covers every grade */
+
+/* A+ */
+.overall-Aplus{ background:#803c97; }                   /* pill   = dark purple */
+.overall-Aplus .grade-circle{ background:#e5d4f1; }     /* circle = light purple */
+
+/* A */
+.overall-A{ background:#28a745; }                       /* pill   = dark green */
+.overall-A .grade-circle{ background:#d8f0e1; }         /* circle = light green */
+
+/* B */
+.overall-B{ background:#7cc576; }                       /* pill   = dark sage  */
+.overall-B .grade-circle{ background:#dbeedc; }         /* circle = light sage */
+
+/* C */
+.overall-C{ background:#ffc107; }                       /* pill   = dark amber */
+.overall-C .grade-circle{ background:#ffedb8; }         /* circle = light amber */
+
+/* D */
+.overall-D{ background:#fd7e14; }                       /* pill   = dark orange*/
+.overall-D .grade-circle{ background:#ffd6b8; }         /* circle = light orange*/
+
+/* F */
+.overall-F{ background:#dc3545; }                       /* pill   = dark red   */
+.overall-F .grade-circle{ background:#fccccc; }         /* circle = light red  */
+
+/* ===== circle text now matches the pill background colour ===== */
+
+/* A+ */
+.overall-Aplus .grade-circle{ color:#803c97; }
+
+/* A */
+.overall-A .grade-circle{ color:#28a745; }
+
+/* B */
+.overall-B .grade-circle{ color:#7cc576; }
+
+/* C */
+.overall-C .grade-circle{ color:#ffc107; }
+
+/* D */
+.overall-D .grade-circle{ color:#fd7e14; }
+
+/* F */
+.overall-F .grade-circle{ color:#dc3545; }
+
+  /* Diagonal headers */
+  .th-rotate { position: relative; width: 60px; }
+  .th-rotate__inner { position: absolute; bottom: 0; left: 0; transform: rotate(-45deg); transform-origin: bottom left; white-space: nowrap; }
+  .th-rotate__inner {
+    position: absolute;
+    bottom: 0;
+    left: 50%;                  /* center horizontally */
+    transform: translateX(-50%) translateY(-160%) rotate(-45deg);
+    transform-origin: center center;
+    white-space: normal;
+    text-align: left;
+    display: inline-block;
+    width: 150px;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+#th-pttr {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);    
+}
+#th-caot {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+}
+#th-rtct {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+}
+#th-rtmt {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+}
+#th-rtrt {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+}
+#th-sotaapt {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+}
 #scorecard-table thead th.no-icons.sorting:before,
 #scorecard-table thead th.no-icons.sorting_asc:before,
 #scorecard-table thead th.no-icons.sorting_desc:before,
 #scorecard-table thead th.no-icons.sorting:after,
 #scorecard-table thead th.no-icons.sorting_asc:after,
-#scorecard-table thead th.no-icons.sorting_desc:after { display:none !important; }
+#scorecard-table thead th.no-icons.sorting_desc:after {
+  display: none !important;
+}                                    
+#th-state {
+  font-size: 1.1rem;                                          
+}                                           
+/* center all cell content, including grade circles and pills */
+    #scorecard-table th:nth-child(1), #scorecard-table td:nth-child(1) {}
+    #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2) {  text-align: center !important; vertical-align: middle;  }
+    #scorecard-table th:nth-child(3), #scorecard-table td:nth-child(3) {  text-align: center !important; vertical-align: middle;  }
+    #scorecard-table th:nth-child(4), #scorecard-table td:nth-child(4) {  text-align: center !important; vertical-align: middle;  }
+    #scorecard-table th:nth-child(5), #scorecard-table td:nth-child(5) {  text-align: center !important; vertical-align: middle;   }
+    #scorecard-table th:nth-child(6), #scorecard-table td:nth-child(6) {  text-align: center !important; vertical-align: middle;   }
+    #scorecard-table th:nth-child(7), #scorecard-table td:nth-child(7) {  text-align: center !important; vertical-align: middle;   }
+    #scorecard-table th:nth-child(8), #scorecard-table td:nth-child(8) {  text-align: center !important; vertical-align: middle;   }
+    #scorecard-table th:nth-child(9), #scorecard-table td:nth-child(9) { }
 
-/* Column alignment tweaks */
-#scorecard-table th:nth-child(2),
-#scorecard-table td:nth-child(2),
-#scorecard-table th:nth-child(3),
-#scorecard-table td:nth-child(3),
-#scorecard-table th:nth-child(4),
-#scorecard-table td:nth-child(4),
-#scorecard-table th:nth-child(5),
-#scorecard-table td:nth-child(5),
-#scorecard-table th:nth-child(6),
-#scorecard-table td:nth-child(6),
-#scorecard-table th:nth-child(7),
-#scorecard-table td:nth-child(7),
-#scorecard-table th:nth-child(8),
-#scorecard-table td:nth-child(8){
-  text-align:center !important; vertical-align:middle;
-}
 
-/* ---------- Modal styling ---------- */
-.detail-modal{ display:none; position:fixed; inset:0;
-  background:rgba(0,0,0,.6); justify-content:center; align-items:center;
-  z-index:2147483647 !important; }
-.detail-modal.open{ display:flex; }
-.detail-modal-content{
-  background:#2C3659; color:#fff; padding:20px;
-  border-radius:8px; width:90%; max-width:500px;
-  max-height:90%; overflow-y:auto;
-}
-.detail-close{ float:right; font-size:1.5rem; cursor:pointer; }
-.detail-header{ margin-bottom:10px; }
-.detail-header h2{ margin:0; font-size:1.8rem; }
-.detail-header p{ margin:4px 0 12px; font-size:1rem; }
-.detail-criteria div{ margin-bottom:8px; vertical-align:middle; }
-.detail-criteria strong{ display:inline-block; width:55%; line-height:1.25; padding-right:10px; }
+#scorecard-table td.sorting_1, {
+  text-align: left;
+  vertical-align: middle;  /* ensures perfect vertical centering */
+} 
+                          
+  /* Modal overlay */
+  .detail-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); justify-content: center; align-items: center; z-index: 2147483647 !important; }
+  .detail-modal.open { display: flex; }
+  .detail-modal-content { background: #2C3659; color: white; padding: 20px; border-radius: 8px; width: 90%; max-width: 500px; max-height: 90%; overflow-y: auto; }
+  .detail-close { float: right; font-size: 1.5rem; cursor: pointer; }
+  .detail-header { margin-bottom: 10px; }
+  .detail-header h2 { margin: 0; font-size: 1.8rem; }
+  .detail-header p { margin: 4px 0 12px; font-size: 1rem; }
+  .detail-criteria div { margin-bottom: 8px; vertical-align: middle; }
+  .detail-criteria strong { display: inline-block; width: 55%; line-height:1.25; padding-right:10px; vertical-align: middle; }
 
-/* ---------- Responsive tweaks ---------- */
-@media(max-width:1100px){
-  .detail-modal-content{ margin:10px; width:calc(100% - 20px) !important; max-width:none !important; }
-  #scorecard-table th:nth-child(n+3):nth-child(-n+8),
-  #scorecard-table td:nth-child(n+3):nth-child(-n+8){ display:none; }
-  #scorecard-table th:first-child,
-  #scorecard-table td:first-child{ width:30% !important; }
-  #scorecard-table th:nth-child(2),
-  #scorecard-table td:nth-child(2){ width:20% !important; }
-  #scorecard-table th:nth-child(9),
-  #scorecard-table td:nth-child(9){ width:50% !important; }
-  .grade-circle{ width:35px; height:35px; line-height:35px; font-size:1.1rem; }
-  .overall-pill{ font-size:.9rem; padding:6px 10px; margin-top:5px; }
-  .pass, .fail{ font-size:1.1rem; }
-}
-@media(min-width:1100px){
-  #scorecard-table th:nth-child(1), #scorecard-table td:nth-child(1){ width:25% !important; }
-  #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2){ width:10% !important; }
-  #scorecard-table th:nth-child(3), #scorecard-table td:nth-child(3){ width:6%  !important; }
-  #scorecard-table th:nth-child(4), #scorecard-table td:nth-child(4){ width:10% !important; }
-  #scorecard-table th:nth-child(5), #scorecard-table td:nth-child(5){ width:6%  !important; }
-  #scorecard-table th:nth-child(6), #scorecard-table td:nth-child(6){ width:6%  !important; }
-  #scorecard-table th:nth-child(7), #scorecard-table td:nth-child(7){ width:6%  !important; }
-  #scorecard-table th:nth-child(8), #scorecard-table td:nth-child(8){ width:6%  !important; }
-  #scorecard-table th:nth-child(9), #scorecard-table td:nth-child(9){ width:24% !important; }
-}
+#detail-criteria-overall { font-size: 1.2rem; }
+
+  @media (max-width: 1100px) {
+    .detail-modal-content { margin: 10px; width: calc(100% - 20px) !important; max-width: none !important; }
+    #scorecard-table th:nth-child(n+3):nth-child(-n+8), #scorecard-table td:nth-child(n+3):nth-child(-n+8) { display: none; }
+    #scorecard-table th:first-child, #scorecard-table td:first-child { width: 30% !important; }
+    #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2) { width: 20% !important; }
+    #scorecard-table th:nth-child(9), #scorecard-table td:nth-child(9) { width: 50% !important; }
+    .grade-circle { width: 35px; height: 35px; line-height: 35px; font-size: 1.1rem; vertical-align: middle;}
+    .overall-pill { font-size: 0.9rem; padding: 6px 10px; margin-top: 5px;  }
+    .pass, .fail { font-size: 1.1rem;}
+    #detail-overall-css {
+        font-size:1.2rem;
+    }
+  }
+  @media (min-width: 1100px) {
+    #scorecard-table th:nth-child(1), #scorecard-table td:nth-child(1) { width: 25% !important; }
+    #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2) { width: 10% !important; }
+    #scorecard-table th:nth-child(3), #scorecard-table td:nth-child(3) { width: 6% !important; }
+    #scorecard-table th:nth-child(4), #scorecard-table td:nth-child(4) { width: 10% !important; }
+    #scorecard-table th:nth-child(5), #scorecard-table td:nth-child(5) { width: 6% !important; }
+    #scorecard-table th:nth-child(6), #scorecard-table td:nth-child(6) { width: 6% !important; }
+    #scorecard-table th:nth-child(7), #scorecard-table td:nth-child(7) { width: 6% !important; }
+    #scorecard-table th:nth-child(8), #scorecard-table td:nth-child(8) { width: 6% !important; }
+    #scorecard-table th:nth-child(9), #scorecard-table td:nth-child(9) { width: 24% !important; }
+  }
