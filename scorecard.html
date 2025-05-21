@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- DataTables + site CSS -->
+  <link rel="stylesheet"
+        href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" href="scorecard.css" />
+
+  <title>Congressional Tariff Messaging Index</title>
+</head>
+<body>
+
+  <div class="scorecard-container">
+    <!-- Optional: state filter select goes here -->
+    <select id="state-filter">
+      <option value="">All states</option>
+    </select>
+
+    <!-- Scorecard table -->
+    <table id="scorecard-table" class="display">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th id="th-state">District</th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-pttr">
+              <span>Pre-Trump&nbsp;Trade&nbsp;Record</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-caot">
+              <span>Congressional Authority&nbsp;over&nbsp;Tariffs</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-rtct">
+              <span>Response to&nbsp;Canada&nbsp;Tariffs</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-rtmt">
+              <span>Response to&nbsp;Mexico&nbsp;Tariffs</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-rtrt">
+              <span>Response to&nbsp;4/2&nbsp;Reciprocal&nbsp;Tariffs</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-sotaapt">
+              <span>Stance on&nbsp;Tariffs&nbsp;as&nbsp;a&nbsp;Policy&nbsp;Tool</span>
+            </div>
+          </th>
+
+          <th>Overall&nbsp;Grade</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- Detail Modal -->
+  <div id="detail-modal" class="detail-modal">
+    <div class="detail-modal-content">
+      <span class="detail-close">&times;</span>
+
+      <div class="detail-header">
+        <h2 class="detail-name"></h2>
+        <p  class="detail-district"></p>
+      </div>
+
+      <div class="detail-criteria">
+        <div><strong>Pre-Trump Trade Record:</strong>       <span class="detail-pt"></span></div>
+        <div><strong>Congressional Authority over Tariffs:</strong> <span class="detail-sa"></span></div>
+        <div><strong>Response to Canada Tariffs:</strong>   <span class="detail-canada"></span></div>
+        <div><strong>Response to Mexico Tariffs:</strong>   <span class="detail-mexico"></span></div>
+        <div><strong>Response to 4/2 Reciprocal Tariffs:</strong> <span class="detail-liberation"></span></div>
+        <div><strong>Stance on Tariffs as a Policy Tool:</strong>  <span class="detail-strategic"></span></div>
+        <br>
+        <div id="detail-criteria-overall">
+          <strong>Overall Grade:</strong> <span class="detail-overall" id="detail-overall-css"></span>
+        </div>
+      </div>
+
+      <p class="detail-reason" style="margin-top:12px;"></p>
+    </div>
+  </div>
+
+  <!-- JS dependencies (order matters) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+  <!-- Your scorecard logic -->
+  <script src="tariff-scorecard.js"></script>
+</body>
+</html>
