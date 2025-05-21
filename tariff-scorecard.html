@@ -1,0 +1,481 @@
+﻿<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+<style>
+section[data-section-id="68002a77cb0f5218eb6b2f31"] {
+ z-index: 99999 !important;
+}
+
+  /* Inherit site’s default font */
+  .scorecard-container, .scorecard-container * { font-family: inherit !important; }
+  .scorecard-container { width: 100%; max-width: 1200px; margin: 0 auto; overflow-x: auto; }
+  .filters { display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 10px; }
+  .filters input, .filters select { padding: 5px; font-size: 1rem; margin: 5px 0; }
+  #scorecard-table { width: 100% !important; table-layout: fixed; }
+
+
+
+
+#scorecard-table thead th {
+  position: sticky;
+  top: 0;                       /* stay flush with the top */
+  z-index: 1000;                /* sit above table body cells */
+  background: #FDFBE9;          /* match your off-white CNL brand colour */
+}
+
+  /* Top Margin and Search Function */
+  .dataTables_wrapper {}
+  .dataTables_filter { float: left !important; padding-bottom: 5vh; padding-left: 5px; padding-top:5px; }
+  table.dataTable td { padding: 12px !important; vertical-align: middle; cursor: pointer; }
+
+  /* Pass/Fail pills */
+  .pass, .fail { display: inline-block; padding: 4px 12px; border-radius: 999px; color: white; font-weight: bold; white-space: nowrap; font-size: 1.1rem;}
+  .pass { background-color: #28a745; }
+  .fail { background-color: #dc3545; }
+
+  /* Grade circles: base */
+  .grade-circle { display: inline-block; width: 36px; height: 36px; line-height: 36px; border-radius: 50%; color: white; text-align: center; font-weight: bold; font-size: 1.1rem; }
+  /* Column 3: Pre-Trump Trade Record overrides */
+  .grade-Aplus { background-color: #803c97; }
+  .grade-A     { background-color: #28a745; }
+  .grade-B     { background-color: #7cc576; }
+  .grade-C     { background-color: #ffc107; }
+  .grade-D     { background-color: #fd7e14; }
+  .grade-F     { background-color: #dc3545; }
+  .grade-circle.no-record { background-color: gray; }
+  /* Ensure no-record stays gray after sorting */
+  #scorecard-table td .grade-circle.no-record {
+    background-color: gray !important;
+  }
+
+  /* Grade circles: other columns */
+  .grade-circle.grade-Aplus { background-color: #803c97; }
+  .grade-circle.grade-A { background-color: #28a745; }
+  .grade-circle.grade-Aminus { background-color: #218838; }
+  .grade-circle.grade-Bplus { background-color: #7cc576; }
+  .grade-circle.grade-Bminus { background-color: #5cae5c; }
+  .grade-circle.grade-Cplus { background-color: #ffc107; }
+  .grade-circle.grade-Cminus { background-color: #e0a800; }
+  .grade-circle.grade-Dplus { background-color: #fd7e14; }
+  .grade-circle.grade-Dminus { background-color: #c7510a; }
+  .grade-circle.grade-no-record { background-color: gray; }           
+
+ /* ===== OVERALL-GRADE BADGE ===== */
+.overall-pill{
+  /* pill container */
+  display:inline-flex;              /* circle + label side-by-side   */
+  align-items:center;
+  gap:8px;                          /* space between circle & label  */
+  padding:6px 10px;                 /* 18px so text never touches edge */
+  border-radius:999px;              /* fully rounded pill            */
+  font-weight:600;
+  line-height:1;                    /* keeps the pill compact        */
+  font-size:1rem;
+  white-space:nowrap;
+}
+
+/* circle inside the pill */
+.overall-pill .grade-circle{
+  width:34px; height:34px;
+  line-height:34px;                 /* perfect vertical centring     */
+  border-radius:50%;
+  font-weight:800;
+  text-align:center;
+  flex:0 0 34px;                    /* fixed width so label never shifts */
+}
+
+/* label text */
+.overall-pill .grade-label{
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  font-size: 1rem;
+  font-family: inherit !important;
+  font-weight: bold !important;
+}
+
+/* ===== swapped theme: dark pill | light circle | white label ===== */
+.overall-pill .grade-label{ color:#fff; }               /* one-liner covers every grade */
+
+/* A+ */
+.overall-Aplus{ background:#803c97; }                   /* pill   = dark purple */
+.overall-Aplus .grade-circle{ background:#e5d4f1; }     /* circle = light purple */
+
+/* A */
+.overall-A{ background:#28a745; }                       /* pill   = dark green */
+.overall-A .grade-circle{ background:#d8f0e1; }         /* circle = light green */
+
+/* B */
+.overall-B{ background:#7cc576; }                       /* pill   = dark sage  */
+.overall-B .grade-circle{ background:#dbeedc; }         /* circle = light sage */
+
+/* C */
+.overall-C{ background:#ffc107; }                       /* pill   = dark amber */
+.overall-C .grade-circle{ background:#ffedb8; }         /* circle = light amber */
+
+/* D */
+.overall-D{ background:#fd7e14; }                       /* pill   = dark orange*/
+.overall-D .grade-circle{ background:#ffd6b8; }         /* circle = light orange*/
+
+/* F */
+.overall-F{ background:#dc3545; }                       /* pill   = dark red   */
+.overall-F .grade-circle{ background:#fccccc; }         /* circle = light red  */
+
+/* ===== circle text now matches the pill background colour ===== */
+
+/* A+ */
+.overall-Aplus .grade-circle{ color:#803c97; }
+
+/* A */
+.overall-A .grade-circle{ color:#28a745; }
+
+/* B */
+.overall-B .grade-circle{ color:#7cc576; }
+
+/* C */
+.overall-C .grade-circle{ color:#ffc107; }
+
+/* D */
+.overall-D .grade-circle{ color:#fd7e14; }
+
+/* F */
+.overall-F .grade-circle{ color:#dc3545; }
+
+  /* Diagonal headers */
+  .th-rotate { position: relative; width: 60px; }
+  .th-rotate__inner { position: absolute; bottom: 0; left: 0; transform: rotate(-45deg); transform-origin: bottom left; white-space: nowrap; }
+  .th-rotate__inner {
+    position: absolute;
+    bottom: 0;
+    left: 50%;                  /* center horizontally */
+    transform: translateX(-50%) translateY(-160%) rotate(-45deg);
+    transform-origin: center center;
+    white-space: normal;
+    text-align: left;
+    display: inline-block;
+    width: 150px;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+#th-pttr {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);    
+}
+#th-caot {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+}
+#th-rtct {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+}
+#th-rtmt {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+}
+#th-rtrt {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+}
+#th-sotaapt {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+}
+#scorecard-table thead th.no-icons.sorting:before,
+#scorecard-table thead th.no-icons.sorting_asc:before,
+#scorecard-table thead th.no-icons.sorting_desc:before,
+#scorecard-table thead th.no-icons.sorting:after,
+#scorecard-table thead th.no-icons.sorting_asc:after,
+#scorecard-table thead th.no-icons.sorting_desc:after {
+  display: none !important;
+}                                    
+#th-state {
+  font-size: 1.1rem;                                          
+}                                           
+/* center all cell content, including grade circles and pills */
+    #scorecard-table th:nth-child(1), #scorecard-table td:nth-child(1) {}
+    #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2) {  text-align: center !important; vertical-align: middle;  }
+    #scorecard-table th:nth-child(3), #scorecard-table td:nth-child(3) {  text-align: center !important; vertical-align: middle;  }
+    #scorecard-table th:nth-child(4), #scorecard-table td:nth-child(4) {  text-align: center !important; vertical-align: middle;  }
+    #scorecard-table th:nth-child(5), #scorecard-table td:nth-child(5) {  text-align: center !important; vertical-align: middle;   }
+    #scorecard-table th:nth-child(6), #scorecard-table td:nth-child(6) {  text-align: center !important; vertical-align: middle;   }
+    #scorecard-table th:nth-child(7), #scorecard-table td:nth-child(7) {  text-align: center !important; vertical-align: middle;   }
+    #scorecard-table th:nth-child(8), #scorecard-table td:nth-child(8) {  text-align: center !important; vertical-align: middle;   }
+    #scorecard-table th:nth-child(9), #scorecard-table td:nth-child(9) { }
+
+
+#scorecard-table td.sorting_1, {
+  text-align: left;
+  vertical-align: middle;  /* ensures perfect vertical centering */
+} 
+                          
+  /* Modal overlay */
+  .detail-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); justify-content: center; align-items: center; z-index: 2147483647 !important; }
+  .detail-modal.open { display: flex; }
+  .detail-modal-content { background: #2C3659; color: white; padding: 20px; border-radius: 8px; width: 90%; max-width: 500px; max-height: 90%; overflow-y: auto; }
+  .detail-close { float: right; font-size: 1.5rem; cursor: pointer; }
+  .detail-header { margin-bottom: 10px; }
+  .detail-header h2 { margin: 0; font-size: 1.8rem; }
+  .detail-header p { margin: 4px 0 12px; font-size: 1rem; }
+  .detail-criteria div { margin-bottom: 8px; vertical-align: middle; }
+  .detail-criteria strong { display: inline-block; width: 55%; line-height:1.25; padding-right:10px; vertical-align: middle; }
+
+#detail-criteria-overall { font-size: 1.2rem; }
+
+  @media (max-width: 1100px) {
+    .detail-modal-content { margin: 10px; width: calc(100% - 20px) !important; max-width: none !important; }
+    #scorecard-table th:nth-child(n+3):nth-child(-n+8), #scorecard-table td:nth-child(n+3):nth-child(-n+8) { display: none; }
+    #scorecard-table th:first-child, #scorecard-table td:first-child { width: 30% !important; }
+    #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2) { width: 20% !important; }
+    #scorecard-table th:nth-child(9), #scorecard-table td:nth-child(9) { width: 50% !important; }
+    .grade-circle { width: 35px; height: 35px; line-height: 35px; font-size: 1.1rem; vertical-align: middle;}
+    .overall-pill { font-size: 0.9rem; padding: 6px 10px; margin-top: 5px;  }
+    .pass, .fail { font-size: 1.1rem;}
+    #detail-overall-css {
+        font-size:1.2rem;
+    }
+  }
+  @media (min-width: 1100px) {
+    #scorecard-table th:nth-child(1), #scorecard-table td:nth-child(1) { width: 25% !important; }
+    #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2) { width: 10% !important; }
+    #scorecard-table th:nth-child(3), #scorecard-table td:nth-child(3) { width: 6% !important; }
+    #scorecard-table th:nth-child(4), #scorecard-table td:nth-child(4) { width: 10% !important; }
+    #scorecard-table th:nth-child(5), #scorecard-table td:nth-child(5) { width: 6% !important; }
+    #scorecard-table th:nth-child(6), #scorecard-table td:nth-child(6) { width: 6% !important; }
+    #scorecard-table th:nth-child(7), #scorecard-table td:nth-child(7) { width: 6% !important; }
+    #scorecard-table th:nth-child(8), #scorecard-table td:nth-child(8) { width: 6% !important; }
+    #scorecard-table th:nth-child(9), #scorecard-table td:nth-child(9) { width: 24% !important; }
+  }
+</style>
+
+<div class="scorecard-container">
+  <table id="scorecard-table" class="display">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th id="th-state">District</th>
+        <th class="th-rotate no-icons"><div class="th-rotate__inner" id="th-pttr"><span>Pre‑Trump Trade Record</span></div></th>
+        <th class="th-rotate no-icons"><div class="th-rotate__inner" id="th-caot"><span>Congressional Authority over Tariffs</span></div></th>
+        <th class="th-rotate no-icons"><div class="th-rotate__inner" id="th-rtct"><span>Response to Canada Tariffs</span></div></th>
+        <th class="th-rotate no-icons"><div class="th-rotate__inner" id="th-rtmt"><span>Response to Mexico Tariffs</span></div></th>
+        <th class="th-rotate no-icons"><div class="th-rotate__inner" id="th-rtrt"><span>Response to 4/2 Reciprocal Tariffs</span></div></th>
+        <th class="th-rotate no-icons"><div class="th-rotate__inner" id="th-sotaapt"><span>Stance on Tariffs as a Policy Tool</span></div></th>
+        <th>Overall Grade</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<!-- Detail Modal -->
+<div id="detail-modal" class="detail-modal">
+  <div class="detail-modal-content">
+    <span class="detail-close">&times;</span>
+    <div class="detail-header">
+      <h2 class="detail-name"></h2>
+      <p class="detail-district"></p>
+    </div>
+    <div class="detail-criteria">
+      <div><strong>Pre‑Trump Trade Record:</strong> <span class="detail-pt"></span></div>
+      <div><strong>Congressional Authority over Tariffs:</strong> <span class="detail-sa"></span></div>
+      <div><strong>Response to Canada Tariffs:</strong> <span class="detail-canada"></span></div>
+      <div><strong>Response to Mexico Tariffs:</strong> <span class="detail-mexico"></span></div>
+      <div><strong>Response to 4/2 Reciprocal Tariffs:</strong> <span class="detail-liberation"></span></div>
+      <div><strong>Stance on Tariffs as a Policy Tool:</strong> <span class="detail-strategic"></span></div>
+      <br><div><strong id="detail-criteria-overall">Overall Grade:</strong> <span class="detail-overall" id="detail-overall-css"></span></div>                                                
+    </div>
+    <p class="detail-reason" style="margin-top:12px;"></p>
+  </div>
+</div>
+
+<!-- Dependencies -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script>
+(function () {
+
+  /* ---------- 1.  ordering plug-in  ---------- */
+  $.fn.dataTable.ext.order['grade-data'] = function (settings, col) {
+      console.log(this.api()
+      .column(col, { order: 'index' })
+      .nodes()
+      .map(td => $(td).data('order') === undefined ? 0 : $(td).data('order')));
+    return this.api()
+      .column(col, { order: 'index' })
+      .nodes()
+      .map(td => $(td).data('order') === undefined ? 0 : $(td).data('order'));
+  };
+
+  /* numeric ranking for every possible grade */
+  const orderMap = {
+    'A+': 1, 'A': 2,
+    'B': 3, 
+    'C': 4,
+    'D': 5,
+    'F': 6, 'No Record': 7, '–': 7
+  };
+
+  /* ---------- 2.  DataTable initialisation  ---------- */
+
+  const sheetID   = '1Kptpi3Rc2DydW4P7hkABFS0IsgOyIoFFixnGBGzNVp4';
+  const sheetName = 'Sheet1';
+  const url       = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
+
+  const table = $('#scorecard-table').DataTable({
+    paging    : false,
+    info      : false,
+    autoWidth : false,
+    dom       : 'frt',
+
+    /* tell the grade / pass-fail columns to use the plug-in */
+    columnDefs: [
+      { targets:  2, orderDataType: 'grade-data', width: '60px' },   // Pre-Trump
+      { targets:  3, orderDataType: 'grade-data', width: '60px' },   // Pass / Fail
+      { targets: [4,5,6,7], orderDataType: 'grade-data', width: '60px' },
+      { targets:  8, orderDataType: 'grade-data', width: '200px' }
+    ],
+
+    createdRow: function (row, data) {
+
+      /* helper fns */
+      const cssKey = g => g === 'A+' ? 'Aplus' : g.replace('+','plus').replace('-','minus');
+      const gradeHTML = g =>
+        (g === 'No Record' || g === '–')
+          ? '<span class="grade-circle no-record">–</span>'
+          : `<span class="grade-circle grade-${cssKey(g)}">${g}</span>`;
+      const overallLabel = g =>
+        ({ 'A+':'A+ Champion','A':'A - Great','B':'B - Good',
+           'C':'C - Okay','D':'D - Poor','F':'F - Fail' }[g] || g);
+
+      /* col 2  –  Pre-Trump Trade Record */
+      const g2 = data[2].trim();
+      $('td:eq(2)', row)
+        .attr('data-order', orderMap[g2] ?? 0)
+        .html(gradeHTML(g2));
+
+      /* col 3  –  Pass / Fail */
+  const pf = data[3].toString().trim().toLowerCase();
+  $('td:eq(3)', row)
+    .attr('data-order', pf === 'pass' ? 0 : 1)
+    .html(`<span class="${pf === 'pass' ? 'pass' : 'fail'}">
+             ${pf.charAt(0).toUpperCase() + pf.slice(1)}
+           </span>`);
+
+      /* cols 4-7  –  response grades */
+      [4,5,6,7].forEach(idx => {
+        const g = data[idx].trim();
+        $('td:eq('+idx+')', row)
+          .attr('data-order', orderMap[g] ?? 0)
+          .html(gradeHTML(g));
+      });
+
+      /* col 8  –  overall */
+  const ov = data[8].trim();
+  $('td:eq(8)', row)
+    .attr('data-order', orderMap[ov] ?? 0)
+    .html(buildOverallPill(ov));
+}
+  });
+
+  /* ---------- 3.  load data from Google Sheet  ---------- */
+
+  $.get(url, res => {
+    const json = JSON.parse(res.substr(47).slice(0,-2));
+    json.table.rows.forEach(r => {
+      table.row.add(r.c.map(c => c && c.v != null ? c.v : ''));
+    });
+    table.draw();
+
+    /* build state filter */
+    const states = [];
+    table.column(1).data().each(v => {
+      const s = v.split(' /')[0];
+      if (!states.includes(s)) {
+        states.push(s);
+        $('#state-filter').append(`<option>${s}</option>`);
+      }
+    });
+  });
+
+  /* search & state filter wiring */
+  $('#scorecard-table_filter input').on('keyup', function () {
+    table.search(this.value).draw();
+  });
+  $('#state-filter').on('change', function () {
+    const v = $.fn.dataTable.util.escapeRegex(this.value);
+    table.column(1).search(v ? '^' + v : '', true, false).draw();
+  });
+
+/* ---------- 4.  row-click modal details ---------- */
+const cssKey = g => g === 'A+' ? 'Aplus' : g.replace('+', 'plus').replace('-', 'minus');
+
+const gradeCircle = g => {
+  g = (g || '').trim();
+  if (g === 'No Record' || g === '–') {
+    return '<span class="grade-circle no-record">–</span>';
+  }
+  return `<span class="grade-circle grade-${cssKey(g)}">${g}</span>`;
+};
+
+const passFail = v =>
+  (v || '').toString().trim().toLowerCase() === 'pass'
+    ? '<span class="pass">Pass</span>'
+    : '<span class="fail">Fail</span>';
+
+/* --- Build the new “circle + text” pill --------------------------- */
+function buildOverallPill(g) {
+  const textMap = {
+    'A+':'Champion',
+    'A' :'Great',
+    'B' :'Good',
+    'C' :'Okay',
+    'D' :'Poor',
+    'F' :'Fail'
+  };
+  const key   = cssKey(g);           // your existing helper
+  const label = textMap[g] ?? g;
+
+  return `
+    <span class="overall-pill overall-${key}">
+      <span class="grade-circle">${g}</span>
+      <span class="grade-label">${label}</span>
+    </span>`;
+}
+
+
+/* open modal on row click */
+$('#scorecard-table tbody').on('click', 'tr', function () {
+  const d = table.row(this).data();
+  if (!d) return;                    /* no data => clicked a placeholder */
+
+  /* basic info */
+  $('.detail-name')     .text(d[0] || '');
+  $('.detail-district') .text(d[1] || '');
+
+  /* criteria columns */
+  $('.detail-pt')        .html(gradeCircle(d[2]));
+  $('.detail-sa')        .html(passFail(d[3]));
+  $('.detail-canada')    .html(gradeCircle(d[4]));
+  $('.detail-mexico')    .html(gradeCircle(d[5]));
+  $('.detail-liberation').html(gradeCircle(d[6]));
+  $('.detail-strategic') .html(gradeCircle(d[7]));
+
+  /* overall + notes */
+  $('.detail-overall').html(buildOverallPill((d[8] || '').trim()));
+  $('.detail-reason')    .text(d[9] || '');
+
+  $('#detail-modal').addClass('open');
+});
+
+/* close modal (✕ button, click outside, or Esc key) */
+$('.detail-close, #detail-modal').on('click', function (e) {
+  if (e.target === this || $(e.target).hasClass('detail-close')) {
+    $('#detail-modal').removeClass('open');
+  }
+});
+$(document).on('keyup', e => {
+  if (e.key === 'Escape') $('#detail-modal').removeClass('open');
+});
+
+/* ---------- end of script ---------- */
+})();
+</script>
+
+
+
+
+
+
+
