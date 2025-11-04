@@ -73,7 +73,8 @@
 
   /* ---------- 3.  DataTable initialisation ---------- */
 
-  const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQaiqHpsgzBh1dcGZCqO0GG1cTa6gfArPxuuo4AhYcrlijksH4aqeRnY2r18FeTwa_1jJojRSCHLu-y/pub?gid=0&single=true&output=csv';
+  const CSV_URL_BASE = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQaiqHpsgzBh1dcGZCqO0GG1cTa6gfArPxuuo4AhYcrlijksH4aqeRnY2r18FeTwa_1jJojRSCHLu-y/pub?gid=0&single=true&output=csv';
+  const CSV_URL = `${CSV_URL_BASE}&cb=${Date.now()}`; // cache-buster
 
   const table = $('#scorecard-table').DataTable({
     paging   : false,
@@ -83,7 +84,7 @@
     order    : [[9, 'asc']], // sort by overall grade by default
     columnDefs: [
       { targets: 0, width: '160px' }, // name
-      { targets: 1, width: '80px'  }, // state
+      { targets: 1, width: '80px'  }, // state (Party-State string)
       { targets: 2, orderDataType: 'grade-data', width: '60px' },  // Pre-Trump
       { targets: 3, orderDataType: 'grade-data', width: '60px' },  // Pass/Fail
       { targets: [4, 5, 6, 7, 8], orderDataType: 'grade-data', width: '60px' },
@@ -123,18 +124,24 @@
     download: true,
     header: false, // columns A..K, raw
     skipEmptyLines: true,
+    error: function(err, file) {
+      console.error('[Senate Index] CSV load error:', err, file);
+      alert('Error loading data. Check console for details.');
+    },
     complete: function(results) {
       // Expecting columns:
       // 0 Name, 1 Party/State, 2 Pre-Trump, 3 Pass/Fail, 4 SJR81, 5 SJR77, 6 SJR88, 7 232/301, 8 Messaging, 9 Final, 10 Description
-      const rows = results.data;
+      const rows = results.data || [];
 
       // If the first row looks like headers, drop it
       const maybeHeader = rows[0] || [];
-      const looksHeader = (maybeHeader[0] || '').toLowerCase().includes('name');
+      const looksHeader =
+        ((maybeHeader[0] || '').replace(/^\ufeff/, '').trim().toLowerCase() === 'name') ||
+        ((maybeHeader[0] || '').toLowerCase().includes('name'));
       const dataRows = looksHeader ? rows.slice(1) : rows;
 
       dataRows.forEach(r => {
-        // Safety pad
+        // Safety pad to 11 columns
         for (let i = 0; i < 11; i++) if (typeof r[i] === 'undefined') r[i] = '';
 
         // Normalize "No Record" / blanks
@@ -145,49 +152,27 @@
         };
 
         const row = [
-          r[0],        // Name
-          r[1],        // Party/State (displayed as State text in header)
-          norm(r[2]),  // Pre-Trump
+          r[0],             // Name
+          r[1],             // Party/State (header says "State")
+          norm(r[2]),       // Pre-Trump
           (r[3] || '').trim(), // Pass/Fail
-          norm(r[4]),  // SJR81
-          norm(r[5]),  // SJR77
-          norm(r[6]),  // SJR88
-          norm(r[7]),  // 232/301
-          norm(r[8]),  // Messaging
-          norm(r[9]),  // Final Grade
-          (r[10] || '') // Description/Reasoning
+          norm(r[4]),       // SJR81
+          norm(r[5]),       // SJR77
+          norm(r[6]),       // SJR88
+          norm(r[7]),       // 232/301
+          norm(r[8]),       // Messaging
+          norm(r[9]),       // Final Grade
+          (r[10] || '')     // Description/Reasoning (modal-only)
         ];
 
         table.row.add(row);
       });
 
       table.draw();
-
-      // Build state filter options from Party/State (D-CO -> CO)
-      const states = new Set();
-      table.column(1).data().each(v => {
-        const parts = (v || '').toString().split('-');
-        if (parts.length === 2) states.add(parts[1].trim());
-      });
-      [...states].sort().forEach(st => {
-        $('#state-filter').append(`<option value="${st}">${st}</option>`);
-      });
     }
   });
 
-  /* ---------- 5.  State filter binding ---------- */
-  $('#state-filter').on('change', function () {
-    const val = this.value;
-    if (!val) {
-      // clear filter
-      table.column(1).search('').draw();
-    } else {
-      // search for dash + state end (e.g., "-CO")
-      table.column(1).search(`-${val}$`, true, false).draw();
-    }
-  });
-
-  /* ---------- 6.  Row click → modal ---------- */
+  /* ---------- 5.  Row click → modal ---------- */
   $('#scorecard-table tbody').on('click', 'tr', function () {
     const rowData = table.row(this).data();
     if (!rowData) return;

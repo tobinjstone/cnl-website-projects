@@ -1,18 +1,16 @@
-/* Senate index – use same visual language */
+/* Senate index – keep existing look/feel */
 .scorecard-container, .scorecard-container * { font-family: inherit !important; }
 .scorecard-container { width: 100%; max-width: 1200px; margin: 0 auto; overflow-x: auto; }
-.filters { display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 10px; }
-.filters input, .filters select { padding: 5px; font-size: 1rem; margin: 5px 0; }
-#scorecard-table { width: 100% !important; table-layout: fixed; }
 
+#scorecard-table { width: 100% !important; table-layout: fixed; }
 #scorecard-table thead th {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #FDFBE9;
+  background: #FDFBE9; /* CNL off-white */
 }
 
-.dataTables_filter { float: left !important; padding-bottom: 5vh; padding-left: 5px; padding-top:5px; }
+.dataTables_filter { float: left !important; padding-bottom: 5vh; padding-left: 5px; padding-top: 5px; }
 
 /* Rotate headers */
 .th-rotate {
@@ -26,11 +24,9 @@
   transform-origin: left bottom;
   white-space: nowrap;
 }
-.th-fixed {
-  white-space: nowrap;
-}
+.th-fixed { white-space: nowrap; }
 
-/* Grades – reuse existing classes */
+/* Grades – consistent with House version */
 .grade-circle {
   display: inline-block;
   min-width: 36px;
@@ -44,7 +40,6 @@
 }
 .grade-circle.no-record { background: #bfbfbf; color: #fff; }
 
-/* Example colour mapping – keep as in House version */
 .grade-circle.grade-Aplus  { background-color: #0b8c4a; }
 .grade-circle.grade-A      { background-color: #28a745; }
 .grade-circle.grade-Aminus { background-color: #218838; }
@@ -53,7 +48,7 @@
 .grade-circle.grade-D      { background-color: #ff7f50; }
 .grade-circle.grade-F      { background-color: #dc3545; }
 
-/* Pass/Fail labels */
+/* Pass/Fail */
 .pass, .fail {
   display: inline-block;
   padding: 4px 8px;

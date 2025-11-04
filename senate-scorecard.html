@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- DataTables + site CSS -->
-  <link rel="stylesheet"
-        href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
   <link rel="stylesheet" href="senate-scorecard-style.css" />
 
   <title>Senate Tariff Messaging Index</title>
@@ -14,15 +13,6 @@
 <body>
 
   <div class="scorecard-container">
-    <div class="filters">
-      <div>
-        <label for="state-filter"><strong>Filter by State:</strong></label>
-        <select id="state-filter">
-          <option value="">All States</option>
-        </select>
-      </div>
-    </div>
-
     <table id="scorecard-table" class="display compact" style="width:100%">
       <thead>
         <tr>
@@ -89,7 +79,7 @@
 
       <div class="detail-header">
         <h2 class="detail-name"></h2>
-        <p  class="detail-district"></p>
+        <p class="detail-district"></p>
       </div>
 
       <div class="detail-criteria">
@@ -100,7 +90,7 @@
         <div><strong>S.J.Res.88 - Termination of IEEPA Tariffs:</strong> <span class="detail-ieepa"></span></div>
         <div><strong>Stance on Section 232/301 Tariffs:</strong> <span class="detail-232301"></span></div>
         <div><strong>General Messaging Against Tariffs:</strong> <span class="detail-msg"></span></div>
-        <br>
+        <br />
         <div id="detail-criteria-overall">
           <strong>Overall Grade:</strong> <span class="detail-overall" id="detail-overall-css"></span>
         </div>
