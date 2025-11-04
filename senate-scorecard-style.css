@@ -6,24 +6,54 @@
 #scorecard-table thead th {
   position: sticky;
   top: 0;
-  z-index: 1000;
-  background: #FDFBE9; /* CNL off-white */
+  z-index: 1000; /* CNL off-white */
 }
 
 .dataTables_filter { float: left !important; padding-bottom: 5vh; padding-left: 5px; padding-top: 5px; }
 
 /* Rotate headers */
-.th-rotate {
-  height: 140px;
-  white-space: nowrap;
-  vertical-align: bottom !important;
-  text-align: left !important;
+  .th-rotate { position: relative; width: 60px; }
+  .th-rotate__inner { position: absolute; bottom: 0; left: 0; transform: rotate(-45deg); transform-origin: bottom left; white-space: nowrap; }
+  .th-rotate__inner {
+    position: absolute;
+    bottom: 0;
+    left: 50%;                  /* center horizontally */
+    transform: translateX(-50%) translateY(-160%) rotate(-45deg);
+    transform-origin: center center;
+    white-space: normal;
+    text-align: left;
+    display: inline-block;
+    width: 150px;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+#th-pttr {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;    
 }
-.th-rotate__inner {
-  transform: translate(10px, 0) rotate(-35deg);
-  transform-origin: left bottom;
-  white-space: nowrap;
+
+#th-caot {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;    
 }
+
+#th-sjr81{
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;    
+}
+#th-sjr77{
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;    
+}
+#th-sjr88{
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;    
+}
+#th-232301{
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;    
+}
+#th-msg {
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;    
+}
+
+
+
 .th-fixed { white-space: nowrap; }
 
 /* Grades – consistent with House version */
