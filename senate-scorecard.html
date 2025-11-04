@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- DataTables + site CSS -->
+  <link rel="stylesheet"
+        href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" href="senate-scorecard-style.css" />
+
+  <title>Senate Tariff Messaging Index</title>
+</head>
+<body>
+
+  <div class="scorecard-container">
+    <div class="filters">
+      <div>
+        <label for="state-filter"><strong>Filter by State:</strong></label>
+        <select id="state-filter">
+          <option value="">All States</option>
+        </select>
+      </div>
+    </div>
+
+    <table id="scorecard-table" class="display compact" style="width:100%">
+      <thead>
+        <tr>
+          <th class="th-fixed">Name</th>
+          <th class="th-fixed">State</th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-pttr">
+              <span>Pre-Trump Trade Record</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-caot">
+              <span>Congressional Authority Over Tariffs</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-sjr81">
+              <span>S.J.Res.81 - Termination of Brazil Tariffs</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-sjr77">
+              <span>S.J.Res.77 - Termination of Canada Tariffs</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-sjr88">
+              <span>S.J.Res.88 - Termination of IEEPA Tariffs</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-232301">
+              <span>Stance on Section 232/301 Tariffs</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-msg">
+              <span>General Messaging Against Tariffs</span>
+            </div>
+          </th>
+
+          <th class="th-rotate no-icons">
+            <div class="th-rotate__inner" id="th-overall">
+              <span>Final Grade</span>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- Detail Modal -->
+  <div id="detail-modal" class="detail-modal">
+    <div class="detail-modal-content">
+      <span class="detail-close">&times;</span>
+
+      <div class="detail-header">
+        <h2 class="detail-name"></h2>
+        <p  class="detail-district"></p>
+      </div>
+
+      <div class="detail-criteria">
+        <div><strong>Pre-Trump Trade Record:</strong> <span class="detail-pt"></span></div>
+        <div><strong>Congressional Authority Over Tariffs:</strong> <span class="detail-sa"></span></div>
+        <div><strong>S.J.Res.81 - Termination of Brazil Tariffs:</strong> <span class="detail-brazil"></span></div>
+        <div><strong>S.J.Res.77 - Termination of Canada Tariffs:</strong> <span class="detail-canada"></span></div>
+        <div><strong>S.J.Res.88 - Termination of IEEPA Tariffs:</strong> <span class="detail-ieepa"></span></div>
+        <div><strong>Stance on Section 232/301 Tariffs:</strong> <span class="detail-232301"></span></div>
+        <div><strong>General Messaging Against Tariffs:</strong> <span class="detail-msg"></span></div>
+        <br>
+        <div id="detail-criteria-overall">
+          <strong>Overall Grade:</strong> <span class="detail-overall" id="detail-overall-css"></span>
+        </div>
+      </div>
+
+      <p class="detail-reason" style="margin-top:12px;"></p>
+    </div>
+  </div>
+
+  <!-- JS dependencies (order matters) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <!-- Scorecard logic -->
+  <script src="senate-tariff-scorecard-script.js"></script>
+</body>
+</html>

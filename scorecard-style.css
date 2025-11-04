@@ -154,22 +154,22 @@ section[data-section-id="68002a77cb0f5218eb6b2f31"] {
     line-height: 1.2;
   }
 #th-pttr {
-    transform: translateX(-25%) translateY(-160%) rotate(-45deg);    
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;    
 }
 #th-caot {
-    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;   
 }
 #th-rtct {
-    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;   
 }
 #th-rtmt {
-    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;   
 }
 #th-rtrt {
-    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;   
 }
 #th-sotaapt {
-    transform: translateX(-25%) translateY(-160%) rotate(-45deg);   
+    transform: translateX(-25%) translateY(-160%) rotate(-45deg) !important;   
 }
 #scorecard-table thead th.no-icons.sorting:before,
 #scorecard-table thead th.no-icons.sorting_asc:before,
