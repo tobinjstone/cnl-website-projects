@@ -47,6 +47,21 @@ section[data-section-id="68002a77cb0f5218eb6b2f31"] { z-index: 99999 !important;
     cursor: pointer;
 }
 
+/* --- Fix: Left Align Search Bar --- */
+.dataTables_filter {
+    float: left !important;
+    text-align: left !important;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.dataTables_filter input {
+    margin-left: 0 !important;
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 /* --- 3. Table & Sticky Header --- */
 #scorecard-table { 
     width: 100% !important; 
@@ -55,13 +70,15 @@ section[data-section-id="68002a77cb0f5218eb6b2f31"] { z-index: 99999 !important;
 }
 
 #scorecard-table thead th {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: #FDFBE9;
-    padding-bottom: 120px; /* Space for rotated text */
+    height: 140px; /* Define exact height */
     vertical-align: bottom;
+    padding: 0 !important;
     border-bottom: 2px solid #2C3659;
+}
+/* Hide sorting icons on rotated columns */
+#scorecard-table thead th.no-icons::before,
+#scorecard-table thead th.no-icons::after {
+    display: none !important;
 }
 
 table.dataTable td { 
@@ -79,16 +96,14 @@ table.dataTable td {
 
 .th-rotate__inner {
     position: absolute;
-    bottom: 10px;
-    left: 50%;
-    width: 160px; /* Width of the text block */
-    transform: translateX(-50%) rotate(-45deg);
-    transform-origin: left bottom;
-    white-space: nowrap;
+    bottom: 5px;
+    left: 60%;
+    transform: translateX(-15%) rotate(-45deg); /* Tighten the translation */
+    transform-origin: bottom left;
+    width: 150px;
+    white-space: normal; /* Allow text to wrap if it's too long */
+    line-height: 1.1;
     text-align: left;
-    font-weight: bold;
-    font-size: 0.9rem;
-    color: #2C3659;
 }
 
 /* --- 5. Grade Styles & Pills --- */
@@ -112,6 +127,18 @@ table.dataTable td {
 .grade-F, .grade-circle.grade-F { background: #dc3545; }
 .no-record, .grade-circle.no-record { background: #adb5bd !important; }
 
+.pass, .fail {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px; /* Match grade-circle height exactly */
+    min-width: 60px;
+    padding: 0 15px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
 /* Pass/Fail Pills */
 .pass, .fail { 
     padding: 5px 12px; 
@@ -149,7 +176,36 @@ table.dataTable td {
 .overall-C { background: #ffc107; } .overall-C .grade-circle { color: #ffc107; }
 .overall-D { background: #fd7e14; } .overall-D .grade-circle { color: #fd7e14; }
 .overall-F { background: #dc3545; } .overall-F .grade-circle { color: #dc3545; }
+/* --- Fix: Re-incorporating the 2025 Final Grade Theme --- */
+/* (Dark Pill | Light Circle | Color-matched text) */
+.overall-pill {
+    padding: 4px 10px 4px 6px; /* Room for the circle */
+}
 
+/* Darker background for the pill containers */
+.overall-Aplus { background: #803c97; } 
+.overall-A { background: #28a745; }
+.overall-B { background: #7cc576; }
+.overall-C { background: #ffc107; }
+.overall-D { background: #fd7e14; }
+.overall-F { background: #dc3545; }
+
+/* Light circle inside the dark pill */
+.overall-pill .grade-circle {
+    background: rgba(255, 255, 255, 0.85) !important;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 0.85rem;
+}
+
+/* Match the letter color to the pill background */
+.overall-Aplus .grade-circle { color: #803c97; }
+.overall-A .grade-circle { color: #28a745; }
+.overall-B .grade-circle { color: #7cc576; }
+.overall-C .grade-circle { color: #ffc107; }
+.overall-D .grade-circle { color: #fd7e14; }
+.overall-F .grade-circle { color: #dc3545; }
 /* --- 6. Mobile Responsiveness --- */
 @media (max-width: 1100px) {
     /* Only show Senator Name, Party/State, and Final Grade on Mobile */

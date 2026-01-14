@@ -75,7 +75,7 @@
     paging: false,
     info: false,
     autoWidth: false,
-    dom: 'frt', // 'f' is for search, 'r' processing, 't' table
+    dom: '<"top-search-area"f>rt',
     columnDefs: [
       { targets: [2, 4, 5, 6, 7, 8], orderDataType: 'grade-data' }, // Grade circles
       { targets: 3, orderDataType: 'grade-data' },                  // Pass/Fail
