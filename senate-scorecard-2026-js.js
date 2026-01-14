@@ -10,8 +10,15 @@
   const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQaiqHpsgzBh1dcGZCqO0GG1cTa6gfArPxuuo4AhYcrlijksH4aqeRnY2r18FeTwa_1jJojRSCHLu-y/pub?gid=0&single=true&output=csv';
 
   // Numeric rank for sorting (lower = better)
+ // Numeric rank for sorting (lower = better)
   const ORDER_MAP = {
-    'A+': 1, 'A': 2, 'B': 3, 'C': 4, 'D': 5, 'F': 6,
+    'A+': 1, 
+    'A': 2, 
+    'A-': 2.5,  // <-- Added A- here
+    'B': 3, 
+    'C': 4, 
+    'D': 5, 
+    'F': 6,
     'No Record': 7, 'NS': 7, '–': 7, '': 8
   };
 
