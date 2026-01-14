@@ -5,6 +5,7 @@
 .scorecard-container, .scorecard-container * { 
     font-family: ff-tisa-web-pro, sans-serif !important; 
     box-sizing: border-box; 
+    margin-top: 15px;
 }
 
 .scorecard-container { 
@@ -85,7 +86,7 @@
 }
 
 #scorecard-table thead th {
-    height: 140px; /* Define exact height */
+    height: 40px; /* Define exact height */
     vertical-align: bottom;
     border-bottom: 2px solid #2C3659;
 }
