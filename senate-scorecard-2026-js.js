@@ -52,21 +52,22 @@
   };
 
   // Build the combined overall “pill” for the Final Grade
-  function buildOverallPill(g) {
-    const TEXT_MAP = {
-      'A+': 'Champion', 'A': 'Great', 'B': 'Good',
-      'C': 'Okay', 'D': 'Poor', 'F': 'Fail'
-    };
-    const val = (g || '').trim();
-    const key = cssKey(val);
-    const label = TEXT_MAP[val] ?? val;
+// Change the class inside the pill to "pill-circle"
+function buildOverallPill(g) {
+  const TEXT_MAP = {
+    'A+': 'Champion', 'A': 'Great', 'B': 'Good',
+    'C': 'Okay', 'D': 'Poor', 'F': 'Fail'
+  };
+  const val = (g || '').trim();
+  const key = cssKey(val);
+  const label = TEXT_MAP[val] ?? val;
 
-    return `
-      <span class="overall-pill overall-${key}">
-        <span class="grade-circle">${val}</span>
-        <span class="grade-label">${label}</span>
-      </span>`;
-  }
+  return `
+    <span class="overall-pill overall-${key}">
+      <span class="pill-circle">${val}</span>
+      <span class="grade-label">${label}</span>
+    </span>`;
+}
 
   /* ---------- 3. DataTable Initialization ---------- */
 

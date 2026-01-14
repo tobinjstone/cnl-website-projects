@@ -5,7 +5,6 @@
 .scorecard-container, .scorecard-container * { 
     font-family: ff-tisa-web-pro, sans-serif !important; 
     box-sizing: border-box; 
-    margin-top: 15px;
 }
 
 .scorecard-container { 
@@ -14,6 +13,7 @@
     margin: 0 auto; 
     overflow-x: auto; 
     background: #FDFBE9; /* CNL Brand Off-White */
+    margin-top: 15px;
 }
 
 /* --- TOOLTIP THEME: CNL Navy --- */
@@ -170,35 +170,38 @@ table.dataTable td {
 .overall-pill {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    border-radius: 30px;
+    gap: 10px;
+    padding: 5px 15px 5px 6px; /* Extra left-room for the circle */
+    border-radius: 999px;
     color: white;
     font-weight: bold;
     white-space: nowrap;
+    line-height: 1;
 }
 
-.overall-pill .grade-circle { 
-    width: 30px; height: 30px; 
-    line-height: 30px; 
-    background: white !important; /* Circle is always white inside the pill */
-    font-size: 0.9rem;
+.overall-pill .pill-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: 800;
 }
 
-/* Dynamic Pill Colors (Text inside circle matches pill background) */
-.overall-Aplus { background: #803c97; } .overall-Aplus .grade-circle { color: #803c97; }
-.overall-A { background: #28a745; } .overall-A .grade-circle { color: #28a745; }
-.overall-Aminus { background: #5DBF68; } 
-.overall-Aminus .grade-circle { color: #5DBF68; }
-.overall-B { background: #7cc576; } .overall-B .grade-circle { color: #7cc576; }
-.overall-C { background: #ffc107; } .overall-C .grade-circle { color: #ffc107; }
-.overall-D { background: #fd7e14; } .overall-D .grade-circle { color: #fd7e14; }
-.overall-F { background: #dc3545; } .overall-F .grade-circle { color: #dc3545; }
+/* Color Themes: Pill background and Circle text color */
+.overall-Aplus { background: #803c97; } .overall-Aplus .pill-circle { color: #803c97; }
+.overall-A     { background: #28a745; } .overall-A .pill-circle     { color: #28a745; }
+.overall-Aminus { background: #5DBF68; } .overall-Aminus .pill-circle { color: #5DBF68; }
+.overall-B     { background: #7cc576; } .overall-B .pill-circle     { color: #7cc576; }
+.overall-C     { background: #ffc107; } .overall-C .pill-circle     { color: #ffc107; }
+.overall-D     { background: #fd7e14; } .overall-D .pill-circle     { color: #fd7e14; }
+.overall-F     { background: #dc3545; } .overall-F .pill-circle     { color: #dc3545; }
 /* --- Fix: Re-incorporating the 2025 Final Grade Theme --- */
 /* (Dark Pill | Light Circle | Color-matched text) */
-.overall-pill {
-    padding: 4px 10px 4px 6px; /* Room for the circle */
-}
+
 
 /* Darker background for the pill containers */
 .overall-Aplus { background: #803c97; } 
