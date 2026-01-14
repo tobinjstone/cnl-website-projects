@@ -88,7 +88,6 @@
 #scorecard-table thead th {
     height: 140px; /* Define exact height */
     vertical-align: bottom;
-    padding: 0 !important;
     border-bottom: 2px solid #2C3659;
 }
 /* Hide sorting icons on rotated columns */
@@ -231,9 +230,9 @@ table.dataTable td {
     #scorecard-table th:nth-child(n+3):nth-child(-n+9), 
     #scorecard-table td:nth-child(n+3):nth-child(-n+9) { display: none; }
     
-    #scorecard-table th:nth-child(1), #scorecard-table td:nth-child(1) { width: 40% !important; }
-    #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2) { width: 30% !important; }
-    #scorecard-table th:nth-child(10), #scorecard-table td:nth-child(10) { width: 30% !important; }
+    #scorecard-table th:nth-child(1), #scorecard-table td:nth-child(1) { width: 35% !important; }
+    #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2) { width: 20% !important; }
+    #scorecard-table th:nth-child(10), #scorecard-table td:nth-child(10) { width: 45% !important; }
     
 
 }
@@ -258,6 +257,11 @@ table.dataTable td {
 }
 .detail-modal.open { display: flex; }
 
+.detail-name {
+    font-size: 2rem !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .detail-modal-content { 
     background: #2C3659; /* CNL Navy */
     color: white; 
