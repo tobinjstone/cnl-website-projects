@@ -1,0 +1,217 @@
+/* --- 1. General Layout & CNL Branding --- */
+section[data-section-id="68002a77cb0f5218eb6b2f31"] { z-index: 99999 !important; }
+
+.scorecard-container, .scorecard-container * { 
+    font-family: inherit !important; 
+    box-sizing: border-box; 
+}
+
+.scorecard-container { 
+    width: 100%; 
+    max-width: 1250px; 
+    margin: 0 auto; 
+    overflow-x: auto; 
+    background: #FDFBE9; /* CNL Brand Off-White */
+    padding: 20px;
+}
+
+/* --- 2. New Filter Bar Styling --- */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 25px;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+}
+
+.filter-group label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: #2C3659; /* CNL Navy */
+}
+
+.filter-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* --- 3. Table & Sticky Header --- */
+#scorecard-table { 
+    width: 100% !important; 
+    table-layout: fixed; 
+    border-collapse: collapse;
+}
+
+#scorecard-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #FDFBE9;
+    padding-bottom: 120px; /* Space for rotated text */
+    vertical-align: bottom;
+    border-bottom: 2px solid #2C3659;
+}
+
+table.dataTable td { 
+    padding: 15px 10px !important; 
+    vertical-align: middle; 
+    cursor: pointer; 
+    border-bottom: 1px solid #eee;
+}
+
+/* --- 4. Rotated Header Logic (11-Column Fix) --- */
+.th-rotate { 
+    position: relative; 
+    height: 120px; 
+}
+
+.th-rotate__inner {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 160px; /* Width of the text block */
+    transform: translateX(-50%) rotate(-45deg);
+    transform-origin: left bottom;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #2C3659;
+}
+
+/* --- 5. Grade Styles & Pills --- */
+.grade-circle { 
+    display: inline-block; 
+    width: 36px; height: 36px; 
+    line-height: 36px; 
+    border-radius: 50%; 
+    color: white; 
+    text-align: center; 
+    font-weight: bold; 
+    font-size: 1.1rem; 
+}
+
+/* Color Classes */
+.grade-Aplus, .grade-circle.grade-Aplus { background: #803c97; }
+.grade-A, .grade-circle.grade-A { background: #28a745; }
+.grade-B, .grade-circle.grade-B { background: #7cc576; }
+.grade-C, .grade-circle.grade-C { background: #ffc107; }
+.grade-D, .grade-circle.grade-D { background: #fd7e14; }
+.grade-F, .grade-circle.grade-F { background: #dc3545; }
+.no-record, .grade-circle.no-record { background: #adb5bd !important; }
+
+/* Pass/Fail Pills */
+.pass, .fail { 
+    padding: 5px 12px; 
+    border-radius: 20px; 
+    color: white; 
+    font-weight: bold; 
+    font-size: 0.9rem; 
+}
+.pass { background: #28a745; }
+.fail { background: #dc3545; }
+
+/* Overall Grade Badge (Pill Style) */
+.overall-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 30px;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.overall-pill .grade-circle { 
+    width: 30px; height: 30px; 
+    line-height: 30px; 
+    background: white !important; /* Circle is always white inside the pill */
+    font-size: 0.9rem;
+}
+
+/* Dynamic Pill Colors (Text inside circle matches pill background) */
+.overall-Aplus { background: #803c97; } .overall-Aplus .grade-circle { color: #803c97; }
+.overall-A { background: #28a745; } .overall-A .grade-circle { color: #28a745; }
+.overall-B { background: #7cc576; } .overall-B .grade-circle { color: #7cc576; }
+.overall-C { background: #ffc107; } .overall-C .grade-circle { color: #ffc107; }
+.overall-D { background: #fd7e14; } .overall-D .grade-circle { color: #fd7e14; }
+.overall-F { background: #dc3545; } .overall-F .grade-circle { color: #dc3545; }
+
+/* --- 6. Mobile Responsiveness --- */
+@media (max-width: 1100px) {
+    /* Only show Senator Name, Party/State, and Final Grade on Mobile */
+    #scorecard-table th:nth-child(n+3):nth-child(-n+9), 
+    #scorecard-table td:nth-child(n+3):nth-child(-n+9) { display: none; }
+    
+    #scorecard-table th:nth-child(1), #scorecard-table td:nth-child(1) { width: 40% !important; }
+    #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2) { width: 30% !important; }
+    #scorecard-table th:nth-child(10), #scorecard-table td:nth-child(10) { width: 30% !important; }
+    
+    .overall-pill .grade-label { display: none; } /* Hide text label on mobile to save space */
+}
+
+/* Desktop Column Width Adjustments */
+@media (min-width: 1100px) {
+    #scorecard-table th:nth-child(1) { width: 18%; }
+    #scorecard-table th:nth-child(2) { width: 10%; }
+    #scorecard-table th:nth-child(n+3):nth-child(-n+9) { width: 7%; text-align: center; }
+    #scorecard-table th:nth-child(10) { width: 20%; }
+}
+
+/* --- 7. Modal Styling --- */
+.detail-modal { 
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.7); 
+    z-index: 999999; 
+    justify-content: center; 
+    align-items: center; 
+}
+.detail-modal.open { display: flex; }
+
+.detail-modal-content { 
+    background: #2C3659; /* CNL Navy */
+    color: white; 
+    padding: 30px; 
+    border-radius: 12px; 
+    max-width: 600px; 
+    width: 90%; 
+    max-height: 85vh; 
+    overflow-y: auto; 
+    position: relative;
+}
+
+.detail-close { 
+    position: absolute; top: 15px; right: 20px; 
+    font-size: 2rem; cursor: pointer; 
+}
+
+.detail-criteria div { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 0; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+}
+
+.detail-explanation {
+    margin-top: 20px;
+    line-height: 1.6;
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 8px;
+}
