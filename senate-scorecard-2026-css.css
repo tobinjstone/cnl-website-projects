@@ -235,7 +235,7 @@ table.dataTable td {
     #scorecard-table th:nth-child(2), #scorecard-table td:nth-child(2) { width: 30% !important; }
     #scorecard-table th:nth-child(10), #scorecard-table td:nth-child(10) { width: 30% !important; }
     
-    .overall-pill .grade-label { display: none; } /* Hide text label on mobile to save space */
+
 }
 
 /* Desktop Column Width Adjustments */
