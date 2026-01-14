@@ -76,6 +76,22 @@
     info: false,
     autoWidth: false,
     dom: '<"top-search-area"f>rt',
+initComplete: function() {
+        // 1. Initialize Tippy Tooltips
+        tippy('[data-tippy-content]', {
+            theme: 'cnl-navy',
+            placement: 'top',
+            arrow: true,
+        });
+
+        // 2. Move Search Bar ABOVE the Filters
+        const searchBar = $('.dataTables_filter');
+        const filtersDiv = $('.filters');
+
+        if (searchBar.length && filtersDiv.length) {
+            searchBar.insertBefore(filtersDiv);
+        }
+    },
     columnDefs: [
       { targets: [2, 4, 5, 6, 7, 8], orderDataType: 'grade-data' }, // Grade circles
       { targets: 3, orderDataType: 'grade-data' },                  // Pass/Fail
@@ -139,9 +155,6 @@
   /* ---------- 5. Filter Logic ---------- */
 
   // State Dropdown (Partial match, e.g., "DE" matches "D / DE")
-  $('#state-filter').on('change', function () {
-    table.column(1).search(this.value).draw();
-  });
 
   // Party Dropdown (Matches first character "D", "R", or "I")
   $('#party-filter').on('change', function () {

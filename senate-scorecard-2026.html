@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+<link rel="stylesheet" href="https://use.typekit.net/kxb6xor.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
   <link rel="stylesheet" href="senate-scorecard-2026-css.css" />
 
@@ -14,12 +14,6 @@
   <div class="scorecard-container">
     
     <div class="filters">
-      <div class="filter-group">
-        <label for="state-filter">State:</label>
-        <select id="state-filter">
-          <option value="">All States</option>
-          </select>
-      </div>
       
       <div class="filter-group">
         <label for="party-filter">Party:</label>
@@ -46,35 +40,55 @@
 
     <table id="scorecard-table" class="display">
       <thead>
-        <tr>
-          <th>Senator</th>
-          <th>Party / State</th>
+  <tr>
+    <th>Senator</th>
+    <th>Party / State</th>
 
-          <th class="th-rotate no-icons">
-            <div class="th-rotate__inner" id="th-pttr"><span>Pre-Trump Record</span></div>
-          </th>
-          <th class="th-rotate no-icons">
-            <div class="th-rotate__inner" id="th-caot"><span>Cong. Authority</span></div>
-          </th>
-          <th class="th-rotate no-icons">
-            <div class="th-rotate__inner" id="th-sj81"><span>SJ Res 81</span></div>
-          </th>
-          <th class="th-rotate no-icons">
-            <div class="th-rotate__inner" id="th-sj77"><span>SJ Res 77</span></div>
-          </th>
-          <th class="th-rotate no-icons">
-            <div class="th-rotate__inner" id="th-sj88"><span>SJ Res 88</span></div>
-          </th>
-          <th class="th-rotate no-icons">
-            <div class="th-rotate__inner" id="th-s232"><span>Sec. 232/301</span></div>
-          </th>
-          <th class="th-rotate no-icons">
-            <div class="th-rotate__inner" id="th-mess"><span>Broad Messaging</span></div>
-          </th>
+    <th class="th-rotate no-icons">
+      <div class="th-rotate__inner" id="th-pttr" data-tippy-content="The Senator's voting record on trade prior to the Trump administration.">
+        <span>Pre-Trump Record</span>
+      </div>
+    </th>
 
-          <th>Final Grade</th>
-        </tr>
-      </thead>
+    <th class="th-rotate no-icons">
+      <div class="th-rotate__inner" id="th-caot" data-tippy-content="Stance on legislation asserting Congressional authority over tariffs.">
+        <span>Cong. Authority</span>
+      </div>
+    </th>
+
+    <th class="th-rotate no-icons">
+      <div class="th-rotate__inner" id="th-sj81" data-tippy-content="Vote on S.J. Res 81, a resolution to overturn the executive order imposing 25% tariffs on Brazilian steel.">
+        <span>SJ Res 81 (Brazil)</span>
+      </div>
+    </th>
+
+    <th class="th-rotate no-icons">
+      <div class="th-rotate__inner" id="th-sj77" data-tippy-content="Vote on S.J. Res 77, a resolution to end tariffs on Canadian aluminum and softwood lumber.">
+        <span>SJ Res 77 (Canada)</span>
+      </div>
+    </th>
+
+    <th class="th-rotate no-icons">
+      <div class="th-rotate__inner" id="th-sj88" data-tippy-content="Vote on S.J. Res 88, a resolution to repeal global tariffs on steel and aluminum.">
+        <span>SJ Res 88 (Global)</span>
+      </div>
+    </th>
+
+    <th class="th-rotate no-icons">
+      <div class="th-rotate__inner" id="th-s232" data-tippy-content="Public stance or legislative action regarding Section 232 and Section 301 national security tariffs.">
+        <span>Sec. 232/301 Stance</span>
+      </div>
+    </th>
+
+    <th class="th-rotate no-icons">
+      <div class="th-rotate__inner" id="th-mess" data-tippy-content="General public messaging and rhetoric regarding the use of tariffs as a policy tool.">
+        <span>Broad Messaging</span>
+      </div>
+    </th>
+
+    <th>Final Grade</th>
+  </tr>
+</thead>
       <tbody>
         </tbody>
     </table>
@@ -110,6 +124,9 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
   <script src="senate-scorecard-2026-js.js"></script>
+  
 </body>
 </html>
