@@ -55,8 +55,8 @@
 // Change the class inside the pill to "pill-circle"
 function buildOverallPill(g) {
   const TEXT_MAP = {
-    'A+': 'Champion', 'A': 'Great', 'B': 'Good',
-    'C': 'Okay', 'D': 'Poor', 'F': 'Fail'
+    'A+': 'Trade Titan', 'A': 'Leader', 'B': 'Ally',
+    'C': 'Neutral', 'D': 'Skeptic', 'F': 'Barrier'
   };
   const val = (g || '').trim();
   const key = cssKey(val);
